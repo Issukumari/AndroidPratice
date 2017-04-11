@@ -1,0 +1,60 @@
+package bridgelabz.app.com.listviewswipetest.Fragment;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import bridgelabz.app.com.listviewswipetest.R;
+import bridgelabz.app.com.listviewswipetest.model.DataModel;
+import bridgelabz.app.com.listviewswipetest.ui.TodoHomeActivity;
+import bridgelabz.app.com.listviewswipetest.ui.TodoNoteAddActivity;
+
+/**
+ * Created by bridgeit on 8/4/17.
+ */
+public class TodoNoteaddFragment extends Fragment  {
+    AppCompatEditText Title;
+    AppCompatEditText Description;
+    AppCompatButton save_button;
+    TodoHomeActivity todohomeactivity;
+
+    public TodoNoteaddFragment(TodoHomeActivity todoHomeActivity) {
+        this.todohomeactivity=todoHomeActivity;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.todonoteaddfragment, container, false);
+        Title = (AppCompatEditText) view.findViewById(R.id.edittext_title);
+        Description = (AppCompatEditText) view.findViewById(R.id.edittext_description);
+        save_button = (AppCompatButton) view.findViewById(R.id.save_button);
+        if (savedInstanceState == null) {
+        }
+
+        save_button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                String titleData = Title.getText().toString();
+                String DescriptiontData = Description.getText().toString();
+                DataModel mode=new DataModel();
+                mode.setTitle(titleData);
+                mode.setDescription(DescriptiontData);
+                todohomeactivity.setData(mode);
+               getActivity().getSupportFragmentManager().popBackStackImmediate();
+
+            }
+        });
+        return view;
+    }
+
+}
+
+
